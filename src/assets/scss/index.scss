@@ -1,0 +1,36 @@
+@charset "utf-8";
+@import "../../../node_modules/bulma/bulma.sass";
+@import "../../../node_modules/bulma/sass/components/navbar.sass";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Chivo&display=swap');
+
+// Update Bulma's global variables
+$family-sans-serif: "Chivo", sans-serif;
+
+@import "colors.scss";
+
+$navbar-item-hover-background-color: $three;
+$navbar-breakpoint: 600px;
+
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "one": ($one, $one-invert),
+    "two": ($two, $two-invert),
+    "three": ($three, $three-invert),
+    "four": ($four, $four-invert),
+    "five": ($five, $five-invert),
+);
+
+// Import only what you need from Bulma
+@import "~bulma"
