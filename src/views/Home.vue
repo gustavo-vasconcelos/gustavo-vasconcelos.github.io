@@ -114,7 +114,7 @@
 					>
 						<div class="card">
 							<div class="card-content" @click="openModal(project)">
-								<p class="is-size-4">{{ modal.project.title }}</p>
+								<p class="is-size-4">{{ project.title }}</p>
 							</div>
 							<div class="card-image" @click="openModal(project)">
 								<figure class="image">
@@ -165,7 +165,16 @@
 							{{ modal.project.description }}
 						</div>
 						<div>
-							<p>Main features</p>
+							<p class="is-size-5">Technologies</p>
+							<ul>
+								<li
+									v-for="(technology, index) in modal.project.technologies"
+									:key="'technology_' + index"
+								>{{ technology }}</li>
+							</ul>
+						</div>
+						<div v-if="modal.project.features">
+							<p class="is-size-5">Main features</p>
 							<ul>
 								<template v-for="(feature, index) in modal.project.features">
 									<li v-if="feature[0].length === 1" :key="'feature_' + index">{{ feature }}</li>
@@ -184,6 +193,9 @@
 				</section>
 			</div>
 		</div>
+		<footer id="footer" class="has-background-two has-text-centered has-text-white">
+			Me &copy; 2019
+		</footer>
 	</div>
 </template>
 
@@ -237,16 +249,17 @@ export default {
 						demo: "https://gustavo-vasconcelos.github.io/StreetTeca/"
 					},
 					description:
-						"This project was developed during my 1st grade (2nd semester). The main purpose is to manage street libraries.",
-					technologies: ["html", "css", "javascript", "Google Maps API"],
+						"This project was developed during the 2nd semester of the 1st grade. The main purpose is to manage street libraries. There is no back-end involved, all information is kept locally (HTML Web Storage - Local Storage).",
+					technologies: ["html", "css", "javascript", "bootstrap", "Google Maps API"],
 					features: [
 						"Manage users",
 						"Manage libraries",
 						"Manage edit gender & tags",
 						"Manage authors",
 						"Cathalog",
-						["Filter book by", "title", "tag", "author", "library", "genre"],
-						["Sort book:", "alphabetically", "by rating", "by donation date"]
+						"User profile",
+						"Notifications",
+						"Back-office"
 					]
 				},
 
@@ -405,4 +418,16 @@ section hr {
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 }
+
+.modal .content div + div {
+	margin-top: 20px;
+}
+.modal .content div p,
+.modal .content div ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+#footer {
+	padding: 1rem 0 1rem 0;
+} 
 </style>
