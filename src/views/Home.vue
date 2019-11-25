@@ -26,16 +26,19 @@
 							class="navbar-item"
 							:class="!burgerActive ? 'has-text-white' : ''"
 							v-scroll-to="'#about'"
+							@click="burgerActive = false"
 						>About me</a>
 						<a
 							class="navbar-item"
 							:class="!burgerActive ? 'has-text-white' : ''"
 							v-scroll-to="'#skills'"
+							@click="burgerActive = false"
 						>Skills</a>
 						<a
 							class="navbar-item"
 							:class="!burgerActive ? 'has-text-white' : ''"
 							v-scroll-to="'#projects'"
+							@click="burgerActive = false"
 						>Projects</a>
 					</div>
 				</div>
@@ -65,13 +68,29 @@
 				<h1 class="title has-text-white">About me</h1>
 				<hr />
 				<div class="columns">
-					<div class="column is-centered is-4">
-						<img class="is-rounded" src="../assets/img/me.jpg" data-aos="fade-right" />
+					<div class="column is-centered is-4" data-aos="fade-right">
+						<div>
+							<img class="is-rounded" src="../assets/img/me.jpg" />
+						</div>
+						<span class="columns is-centered" style="font-size: 50px; margin-top: 5px;">
+							<a href="https://linkedin.com/in/gustavo-vasconcelos" target="_blank">
+								<i class="column fab fa-linkedin has-text-right button-hover"></i>
+							</a>
+							<a href="https://github.com/gustavo-vasconcelos" target="_blank">
+								<i class="column fab fa-github-square has-text-right button-hover"></i>
+							</a>
+						</span>
 					</div>
-					<div class="column has-text-justified has-text-white" data-aos="fade-left">
+
+					<div class="column is-centered has-text-justified has-text-white" data-aos="fade-left">
 						<p>
 							I'm a
-							<b>student</b> currently attending the 3rd grade of the undergraduate degree in Web Information Systems and Technologies at ESMAD (P.PORTO).
+							<b>student</b> currently attending the 3rd grade of the undergraduate degree in Web Information Systems and Technologies at
+							<a
+								href="http://esmad.ipp.pt"
+								target="_blank"
+								class="has-text-white"
+							>ESMAD (P.PORTO)</a>.
 						</p>
 						<br />
 						<p>I find the web development and IT field very fascinating and interesting, as we use applications and services developed with these technologies on our daily basis.</p>
@@ -146,8 +165,8 @@
 			</div>
 		</section>
 		<div class="modal" :class="{'is-active': modal.active}" v-if="modal.active">
-			<div class="modal-background" @click="closeModal"></div>
-			<div class="modal-card">
+			<div class="modal-background" @click="closeModal" data-aos="fade-in"></div>
+			<div class="modal-card" data-aos="fade-up">
 				<header class="modal-card-head">
 					<p class="modal-card-title">{{ modal.project.title }}</p>
 					<button class="delete" aria-label="close" @click="closeModal"></button>
@@ -206,21 +225,27 @@
 						>Your message was sent. I'll reply you ASAP.</div>
 						<form @submit.prevent="sendEmail">
 							<div class="field">
-								<label class="label">Your email</label>
+								<label class="label" for="email">Your email</label>
 								<div class="control">
-									<input class="input" type="email" v-model="form.data.email" required />
+									<input id="email" class="input" type="email" v-model="form.data.email" required />
 								</div>
 							</div>
 							<div class="field">
-								<label class="label">Subject</label>
+								<label class="label" for="subject">Subject</label>
 								<div class="control">
-									<input class="input" type="text" v-model="form.data.subject" required />
+									<input id="subject" class="input" type="text" v-model="form.data.subject" required />
 								</div>
 							</div>
 							<div class="field">
-								<label class="label">Message</label>
+								<label class="label" for="message">Message</label>
 								<div class="control">
-									<textarea class="textarea" name="message" v-model="form.data.message" required></textarea>
+									<textarea
+										id="message"
+										class="textarea"
+										name="message"
+										v-model="form.data.message"
+										required
+									></textarea>
 								</div>
 							</div>
 							<button
@@ -403,6 +428,7 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Handlee|Raleway&display=swap");
+@import url("../../node_modules/@fortawesome/fontawesome-free/css/all.min.css");
 
 #header span {
 	font-family: "Handlee", cursive;
@@ -445,7 +471,14 @@ section:not([is-one]) .container {
 	box-shadow: 10px 10px 14px -4px rgba(0, 0, 0, 0.45);
 	max-width: 200px;
 }
-
+.button-hover {
+	color: #0b132b;
+	transition: all 0.1s ease-out;
+}
+.button-hover:hover {
+	color: white;
+	transition: all 0.1s ease-in;
+}
 section hr {
 	width: 100px;
 	text-decoration: underline;
