@@ -198,6 +198,12 @@
 				<hr class="has-background-black" />
 				<div class="columns is-centered has-text-left is-multiline">
 					<div class="column is-6">
+						<div
+							class="notification is-primary"
+							v-if="form.notification"
+							@click="form.notification = false"
+							data-aos="fade"
+						>Your message was sent. I'll reply you ASAP.</div>
 						<form @submit.prevent="sendEmail">
 							<div class="field">
 								<label class="label">Your email</label>
@@ -233,6 +239,7 @@
 
 <script>
 import AOS from "aos"
+import axios from "axios"
 
 export default {
 	name: "home",
@@ -341,7 +348,8 @@ export default {
 			},
 			form: {
 				data: { email: "", subject: "", message: "" },
-				sending: false
+				sending: false,
+				notification: false
 			}
 		}
 	},
@@ -363,8 +371,10 @@ export default {
 			this.burgerActive = !this.burgerActive
 		},
 		openModal(project) {
-			this.modal.project = project
-			this.modal.active = true
+			if (project.description) {
+				this.modal.project = project
+				this.modal.active = true
+			}
 		},
 		closeModal() {
 			this.modal.active = false
@@ -377,43 +387,15 @@ export default {
 		async sendEmail() {
 			this.form.sending = true
 
-			const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-				method: "POST",
-				body: JSON.stringify({
-					service_id: "gmail",
-					template_id: "template_GvTYdBq4",
-					user_id: "user_vdMPqb3V9ptqOOVsLKvSh",
-					template_params: this.form.data
-				})
+			await axios.post("https://api.emailjs.com/api/v1.0/email/send", {
+				service_id: "gmail",
+				template_id: "template_GvTYdBq4",
+				user_id: "user_vdMPqb3V9ptqOOVsLKvSh",
+				template_params: this.form.data
 			})
-			/*
-			emailjs
-				.sendForm(
-					"gmail",
-					"template_GvTYdBq4",
-					this.form.data,
-					"user_vdMPqb3V9ptqOOVsLKvSh"
-				)
-				.then(
-					result => {
-						console.log(result)
-						
-						this.sending = false
-					},
-					error => {
-						console.log(error)
-						this.sending = false
-					}
-				)
-			*/
-			// const response = await emailjs.send(
-			// 	"gmail",
-			// 	"template_GvTYdBq4",
-			// 	this.form.data,
-			// 	"user_vdMPqb3V9ptqOOVsLKvSh"
-			// )
-			alert(response)
+			this.clearForm()
 			this.form.sending = false
+			this.form.notification = true
 		}
 	}
 }
@@ -517,5 +499,20 @@ section hr {
 }
 #footer {
 	padding: 1rem 0 1rem 0;
+}
+.notification {
+	cursor: pointer;
+}
+
+.slide-fade-enter-active {
+	transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+	transition: all 0.3s ease;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+	transform: translateX(10px);
+	opacity: 0;
 }
 </style>
