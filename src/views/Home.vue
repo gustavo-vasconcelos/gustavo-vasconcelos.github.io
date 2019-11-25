@@ -41,7 +41,7 @@
 				</div>
 				<div class="navbar-end">
 					<div class="navbar-item">
-						<a class="button is-four">TALK TO ME</a>
+						<a class="button is-four" v-scroll-to="'#contact'">Talk to me</a>
 					</div>
 				</div>
 			</div>
@@ -158,7 +158,6 @@
 						:src="require(`../assets/img/projects/${modal.project.title.toLowerCase().replace(/ /g, '')}/thumb.jpg`)"
 						alt
 					/>
-
 					<div class="content">
 						<div>
 							<p class="is-size-5">Description</p>
@@ -193,9 +192,42 @@
 				</section>
 			</div>
 		</div>
-		<footer id="footer" class="has-background-two has-text-centered has-text-white">
-			Me &copy; 2019
-		</footer>
+		<section id="contact" class="section">
+			<div class="container">
+				<h1 class="title">Talk to me</h1>
+				<hr class="has-background-black" />
+				<div class="columns is-centered has-text-left is-multiline">
+					<div class="column is-6">
+						<form @submit.prevent="sendEmail">
+							<div class="field">
+								<label class="label">Your email</label>
+								<div class="control">
+									<input class="input" type="email" v-model="form.data.email" required />
+								</div>
+							</div>
+							<div class="field">
+								<label class="label">Subject</label>
+								<div class="control">
+									<input class="input" type="text" v-model="form.data.subject" required />
+								</div>
+							</div>
+							<div class="field">
+								<label class="label">Message</label>
+								<div class="control">
+									<textarea class="textarea" name="message" v-model="form.data.message" required></textarea>
+								</div>
+							</div>
+							<button
+								type="submit"
+								class="button is-two is-fullwidth"
+								:class="{'is-loading': form.sending}"
+							>Send</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer id="footer" class="has-background-two has-text-centered has-text-white">Me &copy; 2019</footer>
 	</div>
 </template>
 
@@ -250,7 +282,13 @@ export default {
 					},
 					description:
 						"This project was developed during the 2nd semester of the 1st grade. The main purpose is to manage street libraries. There is no back-end involved, all information is kept locally (HTML Web Storage - Local Storage).",
-					technologies: ["html", "css", "javascript", "bootstrap", "Google Maps API"],
+					technologies: [
+						"html",
+						"css",
+						"javascript",
+						"bootstrap",
+						"Google Maps API"
+					],
 					features: [
 						"Manage users",
 						"Manage libraries",
@@ -300,6 +338,10 @@ export default {
 			modal: {
 				active: false,
 				project: {}
+			},
+			form: {
+				data: { email: "", subject: "", message: "" },
+				sending: false
 			}
 		}
 	},
@@ -326,6 +368,52 @@ export default {
 		},
 		closeModal() {
 			this.modal.active = false
+		},
+		clearForm() {
+			this.form.data.email = ""
+			this.form.data.subject = ""
+			this.form.data.message = ""
+		},
+		async sendEmail() {
+			this.form.sending = true
+
+			const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+				method: "POST",
+				body: JSON.stringify({
+					service_id: "gmail",
+					template_id: "template_GvTYdBq4",
+					user_id: "user_vdMPqb3V9ptqOOVsLKvSh",
+					template_params: this.form.data
+				})
+			})
+			/*
+			emailjs
+				.sendForm(
+					"gmail",
+					"template_GvTYdBq4",
+					this.form.data,
+					"user_vdMPqb3V9ptqOOVsLKvSh"
+				)
+				.then(
+					result => {
+						console.log(result)
+						
+						this.sending = false
+					},
+					error => {
+						console.log(error)
+						this.sending = false
+					}
+				)
+			*/
+			// const response = await emailjs.send(
+			// 	"gmail",
+			// 	"template_GvTYdBq4",
+			// 	this.form.data,
+			// 	"user_vdMPqb3V9ptqOOVsLKvSh"
+			// )
+			alert(response)
+			this.form.sending = false
 		}
 	}
 }
@@ -429,5 +517,5 @@ section hr {
 }
 #footer {
 	padding: 1rem 0 1rem 0;
-} 
+}
 </style>
