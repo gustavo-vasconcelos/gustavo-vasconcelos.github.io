@@ -12,9 +12,10 @@ export default {
 
 <style lang="scss">
 @import "../src/assets/scss/index.scss";
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 #app {
-  font-family: 'Chivo', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

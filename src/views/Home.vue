@@ -207,10 +207,28 @@
 								</template>
 							</ul>
 						</div>
+						<div>
+							<p class="is-size-5">Screenshots:</p>
+							<flickity class="flickity" ref="flickity" :options="flickityOptions">
+								<div class="carousel-cell">
+									<img src="https://i.pinimg.com/originals/6c/db/4b/6cdb4bfe644c483c97ba978b979c6a14.jpg" alt />
+								</div>
+								<div class="carousel-cell">
+									<img src="http://getwallpapers.com/wallpaper/full/9/b/e/101097.jpg" alt />
+								</div>
+								<div class="carousel-cell">
+									<img src="https://cdn.hipwallpaper.com/i/60/62/mtqL30.jpg" alt />
+								</div>
+								<div class="carousel-cell">
+									<img src="https://wallpaperplay.com/walls/full/8/f/e/98382.jpg" alt />
+								</div>
+							</flickity>
+						</div>
 					</div>
 				</section>
 			</div>
 		</div>
+
 		<section id="contact" class="section">
 			<div class="container">
 				<h1 class="title">Talk to me</h1>
@@ -265,9 +283,11 @@
 <script>
 import AOS from "aos"
 import axios from "axios"
+import Flickity from "vue-flickity"
 
 export default {
 	name: "home",
+	components: { Flickity },
 	data() {
 		return {
 			windowWidth: 0,
@@ -371,6 +391,9 @@ export default {
 				active: false,
 				project: {}
 			},
+			flickityOptions: {
+				wrapAround: true,
+			},
 			form: {
 				data: { email: "", subject: "", message: "" },
 				sending: false,
@@ -446,7 +469,7 @@ export default {
 	background-position: center;
 }
 
-section:not([is-one]) .container {
+section:not([is-one]) .container .title {
 	font-family: "Raleway", sans-serif;
 }
 
