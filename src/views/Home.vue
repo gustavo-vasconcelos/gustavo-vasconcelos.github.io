@@ -51,7 +51,7 @@
 		</nav>
 		<section id="header" class="hero is-fullheight is-one">
 			<div class="hero-body">
-				<div class="container" style="margin-top: 80px;">
+				<div class="container">
 					<h4 class="subtitle">
 						Hello
 						<span>
@@ -60,14 +60,6 @@
 					</h4>
 					<h1 class="title">Gustavo Vasconcelos</h1>
 					<h2 class="subtitle">Full-stack developer</h2>
-					<span class="columns is-centered" style="font-size: 50px;">
-						<a href="https://linkedin.com/in/gustavo-vasconcelos" target="_blank">
-							<i class="column fab fa-linkedin has-text-right button-hover"></i>
-						</a>
-						<a href="https://github.com/gustavo-vasconcelos" target="_blank">
-							<i class="column fab fa-github-square has-text-right button-hover"></i>
-						</a>
-					</span>
 				</div>
 			</div>
 		</section>
