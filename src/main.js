@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueScrollTo from 'vue-scrollto'
+import VueCarousel from 'vue-carousel'
 
 Vue.use(VueScrollTo, {
   container: "body",
@@ -16,6 +17,8 @@ Vue.use(VueScrollTo, {
   x: false,
   y: true
 })
+
+Vue.use(VueCarousel)
 
 Vue.config.productionTip = false
 

@@ -51,7 +51,7 @@
 		</nav>
 		<section id="header" class="hero is-fullheight is-one">
 			<div class="hero-body">
-				<div class="container">
+				<div class="container" style="margin-top: 80px;">
 					<h4 class="subtitle">
 						Hello
 						<span>
@@ -60,6 +60,14 @@
 					</h4>
 					<h1 class="title">Gustavo Vasconcelos</h1>
 					<h2 class="subtitle">Full-stack developer</h2>
+					<span class="columns is-centered" style="font-size: 50px;">
+						<a href="https://linkedin.com/in/gustavo-vasconcelos" target="_blank">
+							<i class="column fab fa-linkedin has-text-right button-hover"></i>
+						</a>
+						<a href="https://github.com/gustavo-vasconcelos" target="_blank">
+							<i class="column fab fa-github-square has-text-right button-hover"></i>
+						</a>
+					</span>
 				</div>
 			</div>
 		</section>
@@ -69,19 +77,8 @@
 				<hr />
 				<div class="columns">
 					<div class="column is-centered is-4" data-aos="fade-right">
-						<div>
-							<img class="is-rounded" src="../assets/img/me.jpg" />
-						</div>
-						<span class="columns is-centered" style="font-size: 50px; margin-top: 5px;">
-							<a href="https://linkedin.com/in/gustavo-vasconcelos" target="_blank">
-								<i class="column fab fa-linkedin has-text-right button-hover"></i>
-							</a>
-							<a href="https://github.com/gustavo-vasconcelos" target="_blank">
-								<i class="column fab fa-github-square has-text-right button-hover"></i>
-							</a>
-						</span>
+						<img class="is-rounded" src="../assets/img/me.jpg" />
 					</div>
-
 					<div class="column is-centered has-text-justified has-text-white" data-aos="fade-left">
 						<p>
 							I'm a
@@ -173,10 +170,18 @@
 				</header>
 				<section class="modal-card-body has-text-left">
 					<img
-						v-if="modal.active"
+						v-if="modal.active && !modal.project.url.promotionalVideo"
 						:src="require(`../assets/img/projects/${modal.project.title.toLowerCase().replace(/ /g, '')}/thumb.jpg`)"
-						alt
 					/>
+					<iframe
+						v-else-if="modal.project.url.promotionalVideo"
+						width="100%"
+						height="350"
+						:src="`https://www.youtube.com/embed/${modal.project.url.promotionalVideo}`"
+						frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					></iframe>
 					<div class="content">
 						<div>
 							<p class="is-size-5">Description</p>
@@ -207,22 +212,21 @@
 								</template>
 							</ul>
 						</div>
-						<div>
+						<div v-if="modal.project.screenshots > 0">
 							<p class="is-size-5">Screenshots:</p>
-							<flickity class="flickity" ref="flickity" :options="flickityOptions">
-								<div class="carousel-cell">
-									<img src="https://i.pinimg.com/originals/6c/db/4b/6cdb4bfe644c483c97ba978b979c6a14.jpg" alt />
-								</div>
-								<div class="carousel-cell">
-									<img src="http://getwallpapers.com/wallpaper/full/9/b/e/101097.jpg" alt />
-								</div>
-								<div class="carousel-cell">
-									<img src="https://cdn.hipwallpaper.com/i/60/62/mtqL30.jpg" alt />
-								</div>
-								<div class="carousel-cell">
-									<img src="https://wallpaperplay.com/walls/full/8/f/e/98382.jpg" alt />
-								</div>
-							</flickity>
+							<carousel :per-page="1" :centerMode="true" style="margin: 0">
+								<slide
+									data-index="0"
+									data-name="MySlideName"
+									v-for="(screenshot, index) in modal.project.screenshots"
+									:key="'screnshot_' + index"
+									style="margin: 0"
+								>
+									<img
+										:src="require(`../assets/img/projects/${modal.project.title.toLowerCase().replace(/ /g, '')}/screenshots/${index}.jpg`)"
+									/>
+								</slide>
+							</carousel>
 						</div>
 					</div>
 				</section>
@@ -283,11 +287,9 @@
 <script>
 import AOS from "aos"
 import axios from "axios"
-import Flickity from "vue-flickity"
 
 export default {
 	name: "home",
-	components: { Flickity },
 	data() {
 		return {
 			windowWidth: 0,
@@ -327,10 +329,27 @@ export default {
 			],
 			projects: [
 				{
+					title: "Security System",
+					url: {
+						demo: "https://www.youtube.com/watch?v=buSrHclaZWY",
+						promotionalVideo: "buSrHclaZWY"
+					},
+					description:
+						"This project was developed as final project to the Computational Systems course unit, in order to practise all knowledge learnt. It was managed to create a password protected 'vault' that was locked/unlocked using a servo motor.",
+					technologies: ["arduino"],
+					features: [
+						"Lock/unlock the door",
+						"LCD displaying all info",
+						"Password protection inserted by remote control"
+					],
+					screenshots: 0
+				},
+				{
 					title: "StreetTeca",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/StreetTeca",
-						demo: "https://gustavo-vasconcelos.github.io/StreetTeca/"
+						demo: "https://gustavo-vasconcelos.github.io/StreetTeca/",
+						promotionalVideo: "cb7Wai93B60"
 					},
 					description:
 						"This project was developed during the 2nd semester of the 1st grade. The main purpose is to manage street libraries. There is no back-end involved, all information is kept locally (HTML Web Storage - Local Storage).",
@@ -350,41 +369,85 @@ export default {
 						"User profile",
 						"Notifications",
 						"Back-office"
-					]
+					],
+					screenshots: 4
 				},
-
 				{
 					title: "ATLAS",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/ATLAS",
 						demo: "http://atlas-vue.herokuapp.com/"
-					}
+					},
+					description:
+						"This project is a web application developed during the 2nd year in the Web Information Systems and Technologies course for the Web Programming I subject at ESMAD. The main objective was to develop an app that allowed users to enroll in school events which were created by teachers or admins.",
+					technologies: [
+						"html",
+						"css",
+						"scss",
+						"bootstrap",
+						"javascript",
+						"vue.js",
+						"axios"
+					],
+					features: [
+						"Three different authetication profiles (student, event proponent, admin).",
+						"Workshops/events Publishing and Enrollment.",
+						"Idea discussion forum, open to students and event proponents.",
+						"Gamification elements to improve the User Experience."
+					],
+					screenshots: 0
 				},
 				{
 					title: "ATLAS API",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/ATLAS-server",
 						demo: "https://documenter.getpostman.com/view/6874679/S1Zxbpdr"
-					}
+					},
+					description:
+						"This REST API was developed to feed all the data to the ATLAS web application. It was developed accordingly the MVC pattern. It's fully documented and functional.",
+					technologies: [
+						"javascript",
+						"node.js",
+						"express",
+						"mongo",
+						"mongoose",
+						"REST",
+						"jwt",
+						"cookies"
+					],
+					screenshots: 0
 				},
 				{
 					title: "Pang 0.5",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/Pang-0.5",
 						demo: "https://gustavo-vasconcelos.github.io/Pang-0.5/"
-					}
+					},
+					description:
+						"Developing this game was a final project of a curricular unit. It was coded in plain JavaScript with HTML5 Canvas.",
+					technologies: ["javascript", "html5 canvas"],
+					screenshots: 2
 				},
 				{
 					title: "Soccer Stars",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/Soccer-Stars"
-					}
+					},
+					description:
+						"This game was developed as a project of Physics for Programming where the goal was to make a game in Python using all physic theories learnt.",
+					technologies: ["python", "pygame"],
+					screenshots: 0
 				},
 				{
 					title: "Felicia",
 					url: {
-						repository: "https://github.com/RodrigoQueiros/MAD-Game-Jam-2019"
-					}
+						repository: "https://github.com/gustavo-vasconcelos/Felicia",
+						demo: "https://gustavo-vasconcelos.github.io/Felicia/"
+					},
+					description:
+						"This game was developed during MAD Game Jam 2019. We had 48 hours to develop a game, and the final outcome was Felicia.",
+					technologies: ["javascript", "html5 canvas"],
+					screenshots: 0
 				}
 			],
 			modal: {
@@ -392,7 +455,7 @@ export default {
 				project: {}
 			},
 			flickityOptions: {
-				wrapAround: true,
+				wrapAround: true
 			},
 			form: {
 				data: { email: "", subject: "", message: "" },
@@ -450,27 +513,28 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Handlee|Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Solway|Share+Tech+Mono&display=swap");
 @import url("../../node_modules/@fortawesome/fontawesome-free/css/all.min.css");
 
 #header span {
-	font-family: "Handlee", cursive;
+	font-family: "Share+Tech+Mono", monospace;
 }
 
 #header .title {
-	font-family: "Handlee", cursive;
-	font-size: 2.5rem;
+	font-family: "Share+Tech+Mono", monospace;
+	font-size: 2rem;
+	font-weight: 600;
 }
 
 #header {
-	//background-image: url("https://cdn.wallpapersafari.com/46/64/qc4PoO.jpg");
 	background-image: url("../assets/img/bg.jpg");
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
 section:not([is-one]) .container .title {
-	font-family: "Raleway", sans-serif;
+	font-family: "Solway", serif;
+	font-weight: 600;
 }
 
 .navbar-menu.is-active {
@@ -495,7 +559,7 @@ section:not([is-one]) .container .title {
 	max-width: 200px;
 }
 .button-hover {
-	color: #0b132b;
+	color: #406e8e;
 	transition: all 0.1s ease-out;
 }
 .button-hover:hover {
@@ -530,6 +594,9 @@ section hr {
 	cursor: pointer;
 	padding: 0.5rem 0 0.5rem 0;
 }
+#projects .card .card-content p {
+	font-family: "Solway", serif;
+}
 .card-image,
 .card-footer-item span {
 	cursor: pointer;
@@ -547,6 +614,10 @@ section hr {
 
 .modal .content div + div {
 	margin-top: 20px;
+}
+.VueCarousel-pagination,
+.VueCarousel-dot-container {
+	margin-top: 0 !important;
 }
 .modal .content div p,
 .modal .content div ul {
