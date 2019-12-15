@@ -635,4 +635,7 @@ section hr {
 	transform: translateX(10px);
 	opacity: 0;
 }
+#contact button {
+	font-family: "Montserrat", sans-serif;
+}
 </style>
