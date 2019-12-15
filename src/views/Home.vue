@@ -368,7 +368,8 @@ export default {
 					title: "ATLAS",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/ATLAS",
-						demo: "http://atlas-vue.herokuapp.com/"
+						demo: "http://atlas-vue.herokuapp.com/",
+						promotionalVideo: "pC-v98n7apU"
 					},
 					description:
 						"This project is a web application developed during the 2nd year in the Web Information Systems and Technologies course for the Web Programming I subject at ESMAD. The main objective was to develop an app that allowed users to enroll in school events which were created by teachers or admins.",
