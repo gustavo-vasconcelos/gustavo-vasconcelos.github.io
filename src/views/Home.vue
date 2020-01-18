@@ -73,20 +73,18 @@
 					</div>
 					<div class="column is-centered has-text-justified has-text-white" data-aos="fade-left">
 						<p>
-							I'm a
-							<b>student</b> currently attending the 3rd grade of the undergraduate degree in Web Information Systems and Technologies at
-							<a
+							I'm a senior undergrad <b>student</b> at the <a
 								href="http://esmad.ipp.pt"
 								target="_blank"
 								class="has-text-white"
-							>ESMAD (P.PORTO)</a>.
+							>ESMAD (P.PORTO)</a>, studying Web Information Systems and Technologies.
 						</p>
 						<br />
-						<p>I find the web development and IT field very fascinating and interesting, as we use applications and services developed with these technologies on our daily basis.</p>
+						<p>I find the web development and IT field very fascinating and interesting, because we use applications and services developed with these technologies in our daily lives.</p>
 						<br />
-						<p>During this 2 and a half years, I've been developing many projects under my academic studies, that I'm very proud of.</p>
+						<p>For two and a half years, I have been developing many projects of which I'm very proud, under my academic studies.</p>
 						<br />
-						<p>I'm proficient in both front and back end areas, but I mostly like back-end.</p>
+						<p>I'm proficient in both front and back end areas, but I like back-end the most.</p>
 					</div>
 				</div>
 			</div>
