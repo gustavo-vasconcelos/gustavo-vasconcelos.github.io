@@ -540,6 +540,12 @@ export default {
 					linkInfo: "https://www.mongodb.com/",
 				},
 				{
+					title: "Robo3T",
+					type: "softwares",
+					img: "robo3t.png",
+					linkInfo: "https://www.mongodb.com/",
+				},
+				{
 					title: "Docker",
 					type: "technologies",
 					img: "docker.png",
@@ -556,6 +562,18 @@ export default {
 					type: "technologies",
 					img: "git.png",
 					linkInfo: "https://git-scm.com/",
+				},
+				{
+					title: "Socket.io",
+					type: "technologies",
+					img: "socketio.png",
+					linkInfo: "https://socket.io/",
+				},
+				{
+					title: "Postman",
+					type: "softwares",
+					img: "postman.png",
+					linkInfo: "https://www.postman.com/",
 				},
 				{
 					title: "Three.js",
