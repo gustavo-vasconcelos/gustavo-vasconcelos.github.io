@@ -5,7 +5,7 @@
 				<a
 					role="button"
 					class="navbar-burger burger"
-					:class="{'is-active': burgerActive}"
+					:class="{ 'is-active': burgerActive }"
 					@click="burgerClicked"
 				>
 					<span aria-hidden="true"></span>
@@ -16,8 +16,19 @@
 
 			<div
 				class="navbar-menu"
-				:class="{'is-active': burgerActive, 'has-background-one': !burgerActive, 'has-background-white': burgerActive }"
-				:style="!burgerActive ? {marginLeft: windowWidth * 8 / 1920 + 'rem', marginRight: windowWidth * 8 / 1920 + 'rem'} : {}"
+				:class="{
+					'is-active': burgerActive,
+					'has-background-one': !burgerActive,
+					'has-background-white': burgerActive,
+				}"
+				:style="
+					!burgerActive
+						? {
+								marginLeft: (windowWidth * 8) / 1920 + 'rem',
+								marginRight: (windowWidth * 8) / 1920 + 'rem',
+						}
+						: {}
+				"
 				@click="burgerClicked && windowWidth < 600"
 			>
 				<div class="navbar-start">
@@ -27,19 +38,22 @@
 							:class="!burgerActive ? 'has-text-white' : ''"
 							v-scroll-to="'#about'"
 							@click="burgerActive = false"
-						>About me</a>
+							>About me</a
+						>
 						<a
 							class="navbar-item"
 							:class="!burgerActive ? 'has-text-white' : ''"
 							v-scroll-to="'#skills'"
 							@click="burgerActive = false"
-						>Skills</a>
+							>Skills</a
+						>
 						<a
 							class="navbar-item"
 							:class="!burgerActive ? 'has-text-white' : ''"
 							v-scroll-to="'#projects'"
 							@click="burgerActive = false"
-						>Projects</a>
+							>Projects</a
+						>
 					</div>
 				</div>
 				<div class="navbar-end">
@@ -54,9 +68,7 @@
 				<div class="container">
 					<h4 class="subtitle">
 						Hello
-						<span>
-							<strike>world</strike>
-						</span>! I'm
+						<span> <strike>world</strike> </span>! I'm
 					</h4>
 					<h1 class="title">Gustavo Vasconcelos</h1>
 					<h2 class="subtitle">Full-stack developer</h2>
@@ -70,21 +82,57 @@
 				<div class="columns">
 					<div class="column is-centered is-4" data-aos="fade-right">
 						<img class="is-rounded" src="../assets/img/me.jpg" />
+						<div class="columns is-centered" style="margin-top: 5px">
+							<a
+								href="https://github.com/gustavo-vasconcelos/"
+								class="has-text-two"
+								target="_blank"
+							>
+								<span class="icon is-large" style="font-size: 22px"
+									><i class="fab fa-github" aria-hidden="true"></i
+								></span>
+							</a>
+							<a
+								href="https://www.linkedin.com/in/gustavo-vasconcelos/"
+								class="has-text-two"
+								target="_blank"
+							>
+								<span class="icon is-large" style="font-size: 22px"
+									><i class="fab fa-linkedin" aria-hidden="true"></i
+								></span>
+							</a>
+						</div>
 					</div>
-					<div class="column is-centered has-text-justified has-text-white" data-aos="fade-left">
+					<div
+						class="column is-centered has-text-justified has-text-white"
+						data-aos="fade-left"
+					>
 						<p>
-							I'm a senior undergrad <b>student</b> at the <a
+							I'm a senior undergrad student at the
+							<a
 								href="http://esmad.ipp.pt"
 								target="_blank"
-								class="has-text-white"
-							>ESMAD (P.PORTO)</a>, studying Web Information Systems and Technologies.
+								class="has-text-four"
+								>ESMAD (P.PORTO)</a
+							>, studying Web Information Systems and Technologies. Currently
+							working at
+							<a class="has-text-four" href="https://www.celfocus.com/"
+								>Celfocus</a
+							>
+							as a full-stack developer in an IoT team.
 						</p>
 						<br />
-						<p>I find the web development and IT field very fascinating and interesting, because we use applications and services developed with these technologies in our daily lives.</p>
+						<p>
+							I find the web development and IT field very fascinating and
+							interesting, because we use applications and services developed
+							with these technologies in our daily lives.
+						</p>
 						<br />
-						<p>For two and a half years, I have been developing many projects of which I'm very proud, under my academic studies.</p>
-						<br />
-						<p>I'm proficient in both front and back end areas, but I like back-end the most.</p>
+						<p>
+							During this last years, I've been developing many projects of
+							which I'm very proud, under my academic studies and professional
+							duties.
+						</p>
 					</div>
 				</div>
 			</div>
@@ -93,17 +141,75 @@
 			<div class="container">
 				<h1 class="title has-text-black">Skills</h1>
 				<hr class="has-background-black" />
+				<div class="tabs is-toggle is-fullwidth">
+					<ul>
+						<li
+							:class="selectedSkills.all ? 'is-active' : ''"
+							@click="changedSelectedSkills('all')"
+						>
+							<a>
+								<span class="icon is-small"
+									><i class="fas fa-th" aria-hidden="true"></i
+								></span>
+								<span>All</span>
+							</a>
+						</li>
+						<li
+							:class="selectedSkills.languages ? 'is-active' : ''"
+							@click="changedSelectedSkills('languages')"
+						>
+							<a>
+								<span class="icon is-small"
+									><i class="fas fa-code" aria-hidden="true"></i
+								></span>
+								<span>Languages</span>
+							</a>
+						</li>
+						<li
+							:class="selectedSkills.technologies ? 'is-active' : ''"
+							@click="changedSelectedSkills('technologies')"
+						>
+							<a>
+								<span class="icon is-small"
+									><i class="fas fa-cogs" aria-hidden="true"></i
+								></span>
+								<span>Technologies</span>
+							</a>
+						</li>
+						<li
+							:class="selectedSkills.softwares ? 'is-active' : ''"
+							@click="changedSelectedSkills('softwares')"
+						>
+							<a>
+								<span class="icon is-small"
+									><i class="far fa-window-restore" aria-hidden="true"></i
+								></span>
+								<span>Softwares</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<br />
 				<div class="columns is-mobile is-multiline">
-					<div
-						class="column is-2-widescreen is-3-tablet is-4-mobile"
-						v-for="(skill, index) in skills"
-						:key="'skill_' + index"
-						data-aos="fade-in"
-					>
-						<a :href="skill.linkInfo" target="_blank">
-							<img :src="require(`@/assets/img/skills/${skill.img}`)" />
-						</a>
-					</div>
+					<template v-for="(skill, index) in skills">
+						<div
+							v-if="
+								selectedSkills.all ||
+								selectedSkills[skill.type] ||
+								selectedSkills[skill.type] === 'all'
+							"
+							class="column is-2-widescreen is-3-tablet is-4-mobile"
+							:key="'skill_' + index"
+							data-aos="fade-in"
+						>
+							<a :href="skill.linkInfo" target="_blank">
+								<img
+									:title="skill.title"
+									:src="require(`@/assets/img/skills/${skill.img}`)"
+								/>
+							</a>
+						</div>
+					</template>
 				</div>
 			</div>
 		</section>
@@ -125,7 +231,11 @@
 							<div class="card-image" @click="openModal(project)">
 								<figure class="image">
 									<img
-										:src="require(`@/assets/img/projects/${project.title.toLowerCase().replace(/ /g, '')}/thumb.jpg`)"
+										:src="
+											require(`@/assets/img/projects/${project.title
+												.toLowerCase()
+												.replace(/ /g, '')}/thumb.jpg`)
+										"
 										alt
 									/>
 								</figure>
@@ -134,16 +244,28 @@
 							<footer class="card-footer">
 								<p class="card-footer-item" v-if="project.url.repository">
 									<span>
-										<a :href="project.url.repository" target="_blank" class="has-text-three">GitHub</a>
+										<a
+											:href="project.url.repository"
+											target="_blank"
+											class="has-text-three"
+											>GitHub</a
+										>
 									</span>
 								</p>
 								<p class="card-footer-item" v-if="project.url.demo">
 									<span>
-										<a :href="project.url.demo" target="_blank" class="has-text-three">Live demo</a>
+										<a
+											:href="project.url.demo"
+											target="_blank"
+											class="has-text-three"
+											>Live demo</a
+										>
 									</span>
 								</p>
 								<p class="card-footer-item">
-									<span class="has-text-three" @click="openModal(project)">More info</span>
+									<span class="has-text-three" @click="openModal(project)"
+										>More info</span
+									>
 								</p>
 							</footer>
 						</div>
@@ -151,17 +273,33 @@
 				</div>
 			</div>
 		</section>
-		<div class="modal" :class="{'is-active': modal.active}" v-if="modal.active">
-			<div class="modal-background" @click="closeModal" data-aos="fade-in"></div>
+		<div
+			class="modal"
+			:class="{ 'is-active': modal.active }"
+			v-if="modal.active"
+		>
+			<div
+				class="modal-background"
+				@click="closeModal"
+				data-aos="fade-in"
+			></div>
 			<div class="modal-card" data-aos="fade-up">
 				<header class="modal-card-head">
 					<p class="modal-card-title">{{ modal.project.title }}</p>
-					<button class="delete" aria-label="close" @click="closeModal"></button>
+					<button
+						class="delete"
+						aria-label="close"
+						@click="closeModal"
+					></button>
 				</header>
 				<section class="modal-card-body has-text-left">
 					<img
 						v-if="modal.active && !modal.project.url.promotionalVideo"
-						:src="require(`../assets/img/projects/${modal.project.title.toLowerCase().replace(/ /g, '')}/thumb.jpg`)"
+						:src="
+							require(`../assets/img/projects/${modal.project.title
+								.toLowerCase()
+								.replace(/ /g, '')}/thumb.jpg`)
+						"
 					/>
 					<iframe
 						v-else-if="modal.project.url.promotionalVideo"
@@ -175,7 +313,7 @@
 					<div class="content">
 						<div>
 							<p class="is-size-5">Description</p>
-							{{ modal.project.description }}
+							<div v-html="modal.project.description"></div>
 						</div>
 						<div>
 							<p class="is-size-5">Technologies</p>
@@ -183,19 +321,25 @@
 								<li
 									v-for="(technology, index) in modal.project.technologies"
 									:key="'technology_' + index"
-								>{{ technology }}</li>
+								>
+									{{ technology }}
+								</li>
 							</ul>
 						</div>
 						<div v-if="modal.project.features">
 							<p class="is-size-5">Main features</p>
 							<ul>
 								<template v-for="(feature, index) in modal.project.features">
-									<li v-if="feature[0].length === 1" :key="'feature_' + index">{{ feature }}</li>
+									<li v-if="feature[0].length === 1" :key="'feature_' + index">
+										{{ feature }}
+									</li>
 									<li :key="'feature_' + index" v-else>
 										{{ feature[0] }}
 										<ul>
 											<template v-for="(subfeature, subIndex) in feature">
-												<li v-if="subIndex > 0" :key="'subfeature_' + subIndex">{{ subfeature }}</li>
+												<li v-if="subIndex > 0" :key="'subfeature_' + subIndex">
+													{{ subfeature }}
+												</li>
 											</template>
 										</ul>
 									</li>
@@ -213,7 +357,11 @@
 									style="margin: 0"
 								>
 									<img
-										:src="require(`../assets/img/projects/${modal.project.title.toLowerCase().replace(/ /g, '')}/screenshots/${index}.jpg`)"
+										:src="
+											require(`../assets/img/projects/${modal.project.title
+												.toLowerCase()
+												.replace(/ /g, '')}/screenshots/${index}.jpg`)
+										"
 									/>
 								</slide>
 							</carousel>
@@ -230,22 +378,36 @@
 				<div class="columns is-centered has-text-left is-multiline">
 					<div class="column is-6">
 						<div
-							class="notification is-primary"
+							class="notification is-two"
 							v-if="form.notification"
 							@click="form.notification = false"
 							data-aos="fade"
-						>Your message was sent. I'll reply you ASAP.</div>
+						>
+							Your message was sent. I'll reply you ASAP.
+						</div>
 						<form @submit.prevent="sendEmail">
 							<div class="field">
 								<label class="label" for="email">Your email</label>
 								<div class="control">
-									<input id="email" class="input" type="email" v-model="form.data.email" required />
+									<input
+										id="email"
+										class="input"
+										type="email"
+										v-model="form.data.email"
+										required
+									/>
 								</div>
 							</div>
 							<div class="field">
 								<label class="label" for="subject">Subject</label>
 								<div class="control">
-									<input id="subject" class="input" type="text" v-model="form.data.subject" required />
+									<input
+										id="subject"
+										class="input"
+										type="text"
+										v-model="form.data.subject"
+										required
+									/>
 								</div>
 							</div>
 							<div class="field">
@@ -263,14 +425,23 @@
 							<button
 								type="submit"
 								class="button is-two is-fullwidth"
-								:class="{'is-loading': form.sending}"
-							>Send</button>
+								:class="{ 'is-loading': form.sending }"
+							>
+								Send
+							</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</section>
-		<footer id="footer" class="has-background-two has-text-centered has-text-white">Me &copy; 2019</footer>
+		<footer
+			id="footer"
+			class="has-background-two has-text-centered has-text-white"
+		>
+			Made with <a href="https://vuejs.org/" class="has-text-four" target="_blank">Vue.js</a>
+			<br />
+			&copy; 2019-2020 Gustavo Vasconcelos
+		</footer>
 	</div>
 </template>
 
@@ -284,45 +455,209 @@ export default {
 		return {
 			windowWidth: 0,
 			burgerActive: false,
+			selectedSkills: {
+				all: true,
+				languages: false,
+				technologies: false,
+				softwares: false,
+			},
 			skills: [
 				{
+					title: "HTML",
+					type: "languages",
 					img: "html.png",
-					linkInfo: "https://developer.mozilla.org/en-US/docs/Glossary/HTML"
+					linkInfo: "https://developer.mozilla.org/en-US/docs/Glossary/HTML",
 				},
 				{
+					title: "CSS",
+					type: "languages",
 					img: "css.png",
-					linkInfo: "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
+					linkInfo: "https://developer.mozilla.org/en-US/docs/Glossary/CSS",
 				},
 				{
+					title: "JavaScript",
+					type: "languages",
 					img: "js.png",
-					linkInfo: "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+					linkInfo: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
 				},
-				{ img: "bootstrap.png", linkInfo: "https://getbootstrap.com/" },
-				{ img: "bulma.png", linkInfo: "https://bulma.io/" },
-				{ img: "vue.png", linkInfo: "https://vuejs.org/" },
-				{ img: "npm.png", linkInfo: "https://www.npmjs.com/" },
-				{ img: "node.png", linkInfo: "https://nodejs.org/" },
-				{ img: "express.png", linkInfo: "https://expressjs.com/" },
-				{ img: "mongo.png", linkInfo: "https://www.mongodb.com/" },
-				{ img: "mysql.jpg", linkInfo: "https://www.mysql.com/" },
-				{ img: "git.png", linkInfo: "https://git-scm.com/" },
-				{ img: "three.png", linkInfo: "https://threejs.org/" },
-				{ img: "arduino.png", linkInfo: "https://www.arduino.cc/" },
-				{ img: "cs.png", linkInfo: "https://www.w3schools.com/cs/" },
-				{ img: "python.png", linkInfo: "https://www.python.org/" },
-				{ img: "centos.png", linkInfo: "https://www.centos.org/" },
 				{
-					img: "ps.png",
-					linkInfo: "https://www.adobe.com/products/photoshop.html"
+					title: "Visual Studio Code",
+					type: "softwares",
+					img: "vscode.png",
+					linkInfo: "https://code.visualstudio.com/",
 				},
-				{ img: "xd.png", linkInfo: "https://www.adobe.com/products/xd.html" }
+				{
+					title: "Bootstrap",
+					type: "technologies",
+					img: "bootstrap.png",
+					linkInfo: "https://getbootstrap.com/",
+				},
+				{
+					title: "Bulma",
+					type: "technologies",
+					img: "bulma.png",
+					linkInfo: "https://bulma.io/",
+				},
+				{
+					title: "Vue.js",
+					type: "technologies",
+					img: "vue.png",
+					linkInfo: "https://vuejs.org/",
+				},
+				{
+					title: "npm",
+					type: "technologies",
+					img: "npm.png",
+					linkInfo: "https://www.npmjs.com/",
+				},
+				{
+					title: "Node.js",
+					type: "technologies",
+					img: "node.png",
+					linkInfo: "https://nodejs.org/",
+				},
+				{
+					type: "technologies",
+					img: "express.png",
+					linkInfo: "https://expressjs.com/",
+				},
+				{
+					title: "Express",
+					type: "technologies",
+					img: "twx.png",
+					linkInfo: "https://www.ptc.com/en/products/iiot/thingworx-platform/",
+				},
+				{
+					title: "Vuforia",
+					type: "technologies",
+					img: "vuforia.png",
+					linkInfo: "https://www.ptc.com/en/products/vuforia/",
+				},
+				{
+					title: "MongoDB",
+					type: "technologies",
+					img: "mongo.png",
+					linkInfo: "https://www.mongodb.com/",
+				},
+				{
+					title: "Docker",
+					type: "technologies",
+					img: "docker.png",
+					linkInfo: "https://www.docker.com/",
+				},
+				{
+					title: "MySQL",
+					type: "softwares",
+					img: "mysql.png",
+					linkInfo: "https://www.mysql.com/",
+				},
+				{
+					title: "Git",
+					type: "technologies",
+					img: "git.png",
+					linkInfo: "https://git-scm.com/",
+				},
+				{
+					title: "Three.js",
+					type: "technologies",
+					img: "three.png",
+					linkInfo: "https://threejs.org/",
+				},
+				{
+					title: "Arduino",
+					type: "softwares",
+					img: "arduino.png",
+					linkInfo: "https://www.arduino.cc/",
+				},
+				{
+					title: "Java",
+					type: "languages",
+					img: "java.png",
+					linkInfo: "https://java.com/",
+				},
+				{
+					title: "Python",
+					type: "languages",
+					img: "python.png",
+					linkInfo: "https://www.python.org/",
+				},
+				{
+					title: "C#",
+					type: "languages",
+					img: "cs.png",
+					linkInfo: "https://www.w3schools.com/cs/",
+				},
+				{
+					title: "CentOS",
+					type: "all",
+					img: "centos.png",
+					linkInfo: "https://www.centos.org/",
+				},
+				{
+					title: "Bash",
+					type: "languages",
+					img: "bash.png",
+					linkInfo: "https://www.centos.org/",
+				},
+				{
+					title: "Adobe Photoshop",
+					type: "softwares",
+					img: "ps.png",
+					linkInfo: "https://www.adobe.com/products/photoshop.html",
+				},
+				{
+					title: "Adobe Xd",
+					type: "softwares",
+					img: "xd.png",
+					linkInfo: "https://www.adobe.com/products/xd.html",
+				},
+				{
+					title: "Jira",
+					type: "softwares",
+					img: "jira.png",
+					linkInfo: "https://www.atlassian.com/software/jira",
+				},
 			],
 			projects: [
+				{
+					title: "Dynamic Report Generator",
+					url: {
+						promotionalVideo: "YJ9XL3QPV-Y",
+					},
+					description:
+						"This project was developed by within the scope of my curricular internship - Bachelor’s Degree in Web Information Systems and Technologies, at ESMAD.<br>It was a web application for internal use developed at Celfocus, a subsidiary of Novabase, one of the leaders in the telecommunications sector.<br>More and more companies are looking for new ways to automate processes, so that every resource is maximized. This project is basically an automation, so the whole process of planning, development and implementation is here described. This application has as main objective the generation of automated reports through processes and information executed in external tools, by Quality Assurance engineers. These reports are used for the purpose of internal and external documentation.<br><br>If you wish to see this project report please contact me below.",
+					technologies: [
+						"html",
+						"css",
+						"javascript",
+						"vue.js",
+						"vuetify",
+						"axios",
+						"simpleMDE",
+						"express",
+						"mongo",
+						"mongoose",
+						"REST",
+						"jwt",
+						"docker",
+						"socket.io",
+					],
+					features: [
+						"Generate test case specification report from TestRail and TM4J",
+						"Generate test execution report from TestRail and TM4J",
+						"Generate SIT report from a Jira project",
+						"Export test cases from TestRail to TM4J",
+						"See report history",
+						"See live progress generation info",
+						"Edit report after generation",
+					],
+					screenshots: 3,
+				},
 				{
 					title: "Security System",
 					url: {
 						demo: "https://www.youtube.com/watch?v=buSrHclaZWY",
-						promotionalVideo: "buSrHclaZWY"
+						promotionalVideo: "buSrHclaZWY",
 					},
 					description:
 						"This project was developed as final project to the Computational Systems course unit, in order to practise all knowledge learnt. It was managed to create a password protected 'vault' that was locked/unlocked using a servo motor.",
@@ -330,16 +665,16 @@ export default {
 					features: [
 						"Lock/unlock the door",
 						"LCD displaying all info",
-						"Password protection inserted by remote control"
+						"Password protection inserted by remote control",
 					],
-					screenshots: 0
+					screenshots: 0,
 				},
 				{
 					title: "StreetTeca",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/StreetTeca",
 						demo: "https://gustavo-vasconcelos.github.io/StreetTeca/",
-						promotionalVideo: "cb7Wai93B60"
+						promotionalVideo: "cb7Wai93B60",
 					},
 					description:
 						"This project was developed during the 2nd semester of the 1st grade. The main purpose is to manage street libraries. There is no back-end involved, all information is kept locally (HTML Web Storage - Local Storage).",
@@ -348,7 +683,7 @@ export default {
 						"css",
 						"javascript",
 						"bootstrap",
-						"Google Maps API"
+						"Google Maps API",
 					],
 					features: [
 						"Manage users",
@@ -358,16 +693,16 @@ export default {
 						"Cathalog",
 						"User profile",
 						"Notifications",
-						"Back-office"
+						"Back-office",
 					],
-					screenshots: 4
+					screenshots: 4,
 				},
 				{
 					title: "ATLAS",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/ATLAS",
 						demo: "http://atlas-vue.herokuapp.com/",
-						promotionalVideo: "pC-v98n7apU"
+						promotionalVideo: "pC-v98n7apU",
 					},
 					description:
 						"This project is a web application developed during the 2nd year in the Web Information Systems and Technologies course for the Web Programming I subject at ESMAD. The main objective was to develop an app that allowed users to enroll in school events which were created by teachers or admins.",
@@ -378,21 +713,21 @@ export default {
 						"bootstrap",
 						"javascript",
 						"vue.js",
-						"axios"
+						"axios",
 					],
 					features: [
 						"Three different authetication profiles (student, event proponent, admin).",
 						"Workshops/events Publishing and Enrollment.",
 						"Idea discussion forum, open to students and event proponents.",
-						"Gamification elements to improve the User Experience."
+						"Gamification elements to improve the User Experience.",
 					],
-					screenshots: 0
+					screenshots: 0,
 				},
 				{
 					title: "ATLAS API",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/ATLAS-server",
-						demo: "https://documenter.getpostman.com/view/6874679/S1Zxbpdr"
+						demo: "https://documenter.getpostman.com/view/6874679/S1Zxbpdr",
 					},
 					description:
 						"This REST API was developed to feed all the data to the ATLAS web application. It was developed accordingly the MVC pattern. It's fully documented and functional.",
@@ -404,55 +739,55 @@ export default {
 						"mongoose",
 						"REST",
 						"jwt",
-						"cookies"
+						"cookies",
 					],
-					screenshots: 0
+					screenshots: 0,
 				},
 				{
 					title: "Pang 0.5",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/Pang-0.5",
-						demo: "https://gustavo-vasconcelos.github.io/Pang-0.5/"
+						demo: "https://gustavo-vasconcelos.github.io/Pang-0.5/",
 					},
 					description:
 						"Developing this game was a final project of a curricular unit. It was coded in plain JavaScript with HTML5 Canvas.",
 					technologies: ["javascript", "html5 canvas"],
-					screenshots: 2
+					screenshots: 2,
 				},
 				{
 					title: "Soccer Stars",
 					url: {
-						repository: "https://github.com/gustavo-vasconcelos/Soccer-Stars"
+						repository: "https://github.com/gustavo-vasconcelos/Soccer-Stars",
 					},
 					description:
 						"This game was developed as a project of Physics for Programming where the goal was to make a game in Python using all physic theories learnt.",
 					technologies: ["python", "pygame"],
-					screenshots: 0
+					screenshots: 0,
 				},
 				{
 					title: "Felicia",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/Felicia",
-						demo: "https://gustavo-vasconcelos.github.io/Felicia/"
+						demo: "https://gustavo-vasconcelos.github.io/Felicia/",
 					},
 					description:
 						"This game was developed during MAD Game Jam 2019. We had 48 hours to develop a game, and the final outcome was Felicia.",
 					technologies: ["javascript", "html5 canvas"],
-					screenshots: 0
-				}
+					screenshots: 0,
+				},
 			],
 			modal: {
 				active: false,
-				project: {}
+				project: {},
 			},
 			flickityOptions: {
-				wrapAround: true
+				wrapAround: true,
 			},
 			form: {
 				data: { email: "", subject: "", message: "" },
 				sending: false,
-				notification: false
-			}
+				notification: false,
+			},
 		}
 	},
 	created() {
@@ -468,6 +803,14 @@ export default {
 			if (this.windowWidth >= 600) {
 				this.burgerActive = false
 			}
+		},
+		changedSelectedSkills(skill) {
+			this.selectedSkills.all = false
+			this.selectedSkills.languages = false
+			this.selectedSkills.technologies = false
+			this.selectedSkills.softwares = false
+
+			this.selectedSkills[skill] = true
 		},
 		burgerClicked() {
 			this.burgerActive = !this.burgerActive
@@ -493,13 +836,13 @@ export default {
 				service_id: "gmail",
 				template_id: "template_GvTYdBq4",
 				user_id: "user_vdMPqb3V9ptqOOVsLKvSh",
-				template_params: this.form.data
+				template_params: this.form.data,
 			})
 			this.clearForm()
 			this.form.sending = false
 			this.form.notification = true
-		}
-	}
+		},
+	},
 }
 </script>
 
@@ -616,7 +959,8 @@ section hr {
 	margin-bottom: 0;
 }
 #footer {
-	padding: 1rem 0 1rem 0;
+	padding: 1.5rem 0 1.5rem 0;
+	font-size: 11px;
 }
 .notification {
 	cursor: pointer;
@@ -635,5 +979,10 @@ section hr {
 }
 #contact button {
 	font-family: "Montserrat", sans-serif;
+}
+
+#skills .is-active a {
+	background-color: #1C2541;
+	border: 1px solid #1C2541;
 }
 </style>
