@@ -141,7 +141,7 @@
 			<div class="container">
 				<h1 class="title has-text-black">Skills</h1>
 				<hr class="has-background-black" />
-				<div class="tabs is-toggle is-fullwidth">
+				<div class="tabs is-toggle is-toggle-rounded is-fullwidth">
 					<ul>
 						<li
 							:class="selectedSkills.all ? 'is-active' : ''"
@@ -434,13 +434,13 @@
 				</div>
 			</div>
 		</section>
-		<footer
-			id="footer"
-			class="has-background-two has-text-centered has-text-white"
-		>
-			Made with <a href="https://vuejs.org/" class="has-text-four" target="_blank">Vue.js</a>
-			<br />
-			&copy; 2019-2020 Gustavo Vasconcelos
+		<footer id="footer" class="has-background-two has-text-white is-centered">
+			<a href="https://bulma.io/" class="has-text-four" target="_blank"
+				><img width="120" src="../assets/img/madewithbulma.png"
+			/></a>
+			<p style="margin-top: 10px">
+				Copyright &copy; 2019-2020 Gustavo Vasconcelos
+			</p>
 		</footer>
 	</div>
 </template>
