@@ -640,7 +640,7 @@ export default {
 				{
 					title: "Dynamic Report Generator",
 					url: {
-						promotionalVideo: "YJ9XL3QPV-Y",
+						promotionalVideo: "z9MUiflG63I",
 					},
 					description:
 						"This project was developed by within the scope of my curricular internship - Bachelor’s Degree in Web Information Systems and Technologies, at ESMAD.<br>It was a web application for internal use developed at Celfocus, a subsidiary of Novabase, one of the leaders in the telecommunications sector.<br>More and more companies are looking for new ways to automate processes, so that every resource is maximized. This project is basically an automation, so the whole process of planning, development and implementation is here described. This application has as main objective the generation of automated reports through processes and information executed in external tools, by Quality Assurance engineers. These reports are used for the purpose of internal and external documentation.<br><br>If you wish to see this project report please contact me below.",
