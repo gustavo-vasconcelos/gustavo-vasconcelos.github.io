@@ -691,8 +691,6 @@ export default {
 					title: "StreetTeca",
 					url: {
 						repository: "https://github.com/gustavo-vasconcelos/StreetTeca",
-						demo: "https://gustavo-vasconcelos.github.io/StreetTeca/",
-						promotionalVideo: "cb7Wai93B60",
 					},
 					description:
 						"This project was developed during the 2nd semester of the 1st grade. The main purpose is to manage street libraries. There is no back-end involved, all information is kept locally (HTML Web Storage - Local Storage).",
