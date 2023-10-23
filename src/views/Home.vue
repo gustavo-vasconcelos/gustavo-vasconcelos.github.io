@@ -290,8 +290,6 @@
 			</div>
 		</section>
 		<footer id="footer" class="has-background-two has-text-white is-centered">
-			<a href="https://bulma.io/" class="has-text-four" target="_blank"><img width="120"
-					src="../assets/img/madewithbulma.png" /></a>
 			<p style="margin-top: 10px">
 				Copyright &copy; 2019-2023 Gustavo Vasconcelos
 			</p>
@@ -529,7 +527,7 @@ export default {
 					title: "Security System",
 					url: {
 						demo: "https://www.youtube.com/watch?v=Q1tRANREx",
-						promotionalVideo: "Q1tRANREx",
+						promotionalVideo: "Q1tRANREx-c",
 					},
 					description:
 						"This project was developed as final project to the Computational Systems course unit, in order to practise all knowledge learnt. It was managed to create a password protected 'vault' that was locked/unlocked using a servo motor.",
